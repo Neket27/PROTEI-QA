@@ -21,7 +21,7 @@ public class BagTest extends BaseTest {
     }
 
     @Test
-    void removeProductFromBag(){
+    void clearBag(){
         pageWhatNew =open("/cgi-bin/badstore.cgi?action=whatsnew",PageWhatNew.class);
         pageWhatNew.addProductsInBag(1);
         pageBag =open("/cgi-bin/badstore.cgi?action=cartview", PageBag.class);
@@ -57,10 +57,11 @@ public class BagTest extends BaseTest {
 
 
     @Test
-    void testViewProductInBag(){
+    void testViewProductAndCostInBag(){
         pageWhatNew =open("/cgi-bin/badstore.cgi?action=whatsnew",PageWhatNew.class);
         pageWhatNew.addProductsInBag(1);
         pageBag =open("/cgi-bin/badstore.cgi?action=cartview", PageBag.class);
         pageBag.checkTitle("Cart Contains: 1 items at $11.50");
     }
+
 }

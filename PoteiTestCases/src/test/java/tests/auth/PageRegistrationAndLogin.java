@@ -14,6 +14,10 @@ import static org.testng.AssertJUnit.fail;
 
 public class PageRegistrationAndLogin {
 
+    public void registration(String fullName, String email, String password) {
+        checkRegistration(fullName,email,password);
+    }
+
     public boolean checkRegistration(String fullName, String email, String password) {
         $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=register\"]//input[@name=\"fullname\"]")).val(fullName);
         $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=register\"]//input[@name=\"email\"]")).val(email);
