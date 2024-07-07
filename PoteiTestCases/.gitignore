@@ -1,0 +1,13 @@
+/.idea
+/venv
+*.pyc
+*.iml
+__pycache__
+/logs
+/target/
+/screenshots/*
+/.allure
+/build
+
+# Ignore Gradle build output directory, but not the wrapper
+build
