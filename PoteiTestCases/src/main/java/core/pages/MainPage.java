@@ -24,55 +24,68 @@ public class MainPage {
     private final SelenideElement headerAfterAuth = $(byXpath("//*[contains(text(),'Nikita K')]"));
     private final SelenideElement headerIframe = $(byXpath("//*[@name=\"bsheader\"]"));
 
-    public void clickHomeButton() {
+    public MainPage clickHomeButton() {
         homeButton.click();
+        return this;
     }
 
-    public void clickWhatsNewButton() {
+    public MainPage clickWhatsNewButton() {
         whatsNewButton.click();
+        return this;
     }
 
-    public void clickSignOurGuestbookButton() {
+    public MainPage clickSignOurGuestbookButton() {
         signOurGuestbookButton.click();
+        return this;
     }
 
-    public void clickAboutUsButton() {
+    public MainPage clickAboutUsButton() {
         aboutUsButton.click();
+        return this;
     }
 
-    public void clickMyAccountButton() {
+    public MainPage clickMyAccountButton() {
         myAccountButton.click();
+        return this;
     }
 
-    public void clickLoginAndRegisterButton() {
+    public MainPage clickLoginAndRegisterButton() {
         loginAndRegisterButton.click();
+        return this;
     }
 
-    public void clickSupplierLoginButton() {
+    public MainPage clickSupplierLoginButton() {
         supplierLoginButton.click();
+        return this;
     }
 
-    public void clickSupplierContractButton() {
+    public MainPage clickSupplierContractButton() {
         supplierContractButton.click();
+        return this;
     }
 
-    public void clickSupplierProceduresButton() {
+    public MainPage clickSupplierProceduresButton() {
         supplierProceduresButton.click();
+        return this;
     }
 
-    public void clickViewCartButton() {
+    public MainPage clickViewCartButton() {
         viewCartButton.click();
+        return this;
     }
 
-    public void clickHeaderAfterAuth() {
+    public MainPage clickHeaderAfterAuth() {
         headerAfterAuth.click();
+        return this;
     }
 
-    public void clickHeaderIframe() {
+    public MainPage clickHeaderIframe() {
         headerIframe.click();
+        return this;
     }
 
-    public void clickViewPreviousOrdersButton(){
+    public MainPage clickViewPreviousOrdersButton(){
         viewPreviousOrderButton.click();
+        return this;
     }
 }

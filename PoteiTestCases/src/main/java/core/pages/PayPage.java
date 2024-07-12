@@ -1,8 +1,6 @@
 package core.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import core.BaseTest;
-
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -20,23 +18,27 @@ public class PayPage {
         placeOrderButton.click();
     }
 
-    public void clickPlaceOrderButton(){
+    public PayPage clickPlaceOrderButton(){
         placeOrderButton.click();
+        return this;
     }
 
     public boolean checkExistEmailField(){
         return emailField.exists();
     }
 
-    public void setValueInEmailField(String email){
+    public PayPage setValueInEmailField(String email){
         emailField.setValue(email);
+        return  this;
     }
 
-    public void setValueInNumberCardField(Long numberCard){
+    public PayPage setValueInNumberCardField(Long numberCard){
         numberCardField.setValue(numberCard.toString());
+        return this;
     }
 
-    public void setValueInDateCardField(String date){
+    public PayPage setValueInDateCardField(String date){
         dateCardField.setValue(date);
+        return this;
     }
 }

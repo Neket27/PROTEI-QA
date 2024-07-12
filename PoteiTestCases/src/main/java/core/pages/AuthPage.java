@@ -18,39 +18,47 @@ public class AuthPage {
     private final SelenideElement passwordLoginField= $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=login\"]//input[@name=\"passwd\"]"));
     private final SelenideElement loginButton =  $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=login\"]//input[@type=\"submit\"]"));
 
-    public void registration(String fullName, String email, String password) {
+    public AuthPage registration(String fullName, String email, String password) {
        fullNameField.val(AuthConstants.DEF_USER_FULL_NAME);
        emailLoginField.val(AuthConstants.DEF_USER_EMAIL);
        passwordLoginField.val(AuthConstants.DEF_USER_PASSWORD);
        registrationButton.click();
+       return this;
     }
 
-    public void setValueInFullNameField(String fullName) {
+    public AuthPage setValueInFullNameField(String fullName) {
         fullNameField.val(fullName);
+        return this;
     }
 
-    public void setValueInEmailRegistrationField(String email) {
+    public AuthPage setValueInEmailRegistrationField(String email) {
         emailRegistrationField.val(email);
+        return this;
     }
 
-    public void setValueInPasswordRegistrationField(String password) {
+    public AuthPage setValueInPasswordRegistrationField(String password) {
         passwordRegistrationField.val(password);
+        return this;
     }
 
-    public void setValueInLoginField(String login) {
+    public AuthPage setValueInLoginField(String login) {
         emailLoginField.val(login);
+        return this;
     }
 
-    public void setValueInPasswordLoginField(String password) {
+    public AuthPage setValueInPasswordLoginField(String password) {
         passwordLoginField.val(password);
+        return this;
     }
 
-    public void clickRegistrationButton() {
+    public AuthPage clickRegistrationButton() {
         registrationButton.click();
+        return this;
     }
 
-    public void clickLoginButton() {
+    public AuthPage clickLoginButton() {
         loginButton.click();
+        return this;
     }
 
 }

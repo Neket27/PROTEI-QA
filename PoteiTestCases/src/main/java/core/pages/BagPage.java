@@ -25,16 +25,19 @@ public class BagPage {
         return tableBag.size()-1;
     }
 
-    public void clickResetBagButton() {
+    public BagPage clickResetBagButton() {
        resetButton.click();
+       return this;
     }
 
-    public void checkTitle(String title) {
+    public BagPage checkTitle(String title) {
         this.title.shouldHave(text(title));
+        return this;
     }
 
-    public void clickPlaceOrderButton() {
+    public BagPage clickPlaceOrderButton() {
         placeOrder.click();
+        return this;
     }
 
 }

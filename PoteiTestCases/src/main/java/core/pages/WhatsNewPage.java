@@ -14,20 +14,24 @@ public class WhatsNewPage {
     private final SelenideElement addItemsToCardButton = $(byXpath("//input[@name=\"Add Items to Cart\"]"));
     private final SelenideElement resetChoiceCheckboxButton = $(byXpath("//input[@name=\"Add Items to Cart\"]"));
 
-    public void choiceProductInTable(int  numberProductInTable) {
+    public WhatsNewPage choiceProductInTable(int  numberProductInTable) {
         $(byXpath("(//td[input[@name='cartitem']])["+numberProductInTable+"]")).click();
+        return this;
     }
 
-    public void clickAddItemsToCardButton() {
+    public WhatsNewPage clickAddItemsToCardButton() {
         $(byXpath("//input[@name=\"Add Items to Cart\"]")).click();
+        return this;
     }
 
-    public void clickResetButton() {
+    public WhatsNewPage clickResetButton() {
         $(byXpath("//input[@name=\"reset\"]")).click();
+        return this;
     }
 
-    public void addProductToBag(int numberProductInTable){
+    public WhatsNewPage addProductToBag(int numberProductInTable){
         choiceProductInTable(numberProductInTable);
         clickAddItemsToCardButton();
+        return this;
     }
 }

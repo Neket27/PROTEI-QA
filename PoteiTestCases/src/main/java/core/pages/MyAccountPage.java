@@ -39,18 +39,22 @@ public class MyAccountPage {
         changeDataAccountButton.click();
     }
 
-    public void checkTitleContainsFullName(String fullName) {
+    public MyAccountPage checkTitleContainsFullName(String fullName) {
         titleFullName.shouldHave(text("Current Full Name: "+fullName));
+        return this;
     }
-    public void checkTitleNotContainsFullName(String fullName) {
+    public MyAccountPage checkTitleNotContainsFullName(String fullName) {
         titleFullName.shouldNotHave(text("Current Full Name: "+fullName));
+        return this;
     }
 
-    public void checkTitleContainsEmail(String email) {
+    public MyAccountPage checkTitleContainsEmail(String email) {
         titleFullName.shouldHave(text("Current Email Address: "+email));
+        return this;
     }
 
-    public void checkTitleNotContainsEmail(String email) {
+    public MyAccountPage checkTitleNotContainsEmail(String email) {
         titleFullName.shouldNotHave(text("Current Email Address: "+email));
+        return this;
     }
 }

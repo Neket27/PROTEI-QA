@@ -16,36 +16,43 @@ public class SignOurGuestbookPage {
    private final SelenideElement addEntryButton = $(byXpath("//input[@type=\"submit\"]"));
    private final SelenideElement feedbackBlock = $(byXpath("(//font)[3]"));
 
-   public void setValueInNameField(String name){
+   public SignOurGuestbookPage setValueInNameField(String name){
       nameField.val(name);
+      return this;
    }
-   public void setValueInEmailField(String email){
+   public SignOurGuestbookPage setValueInEmailField(String email){
       emailField.val(email);
+      return this;
    }
-   public void setValueInCommentsField(String comments){
+   public SignOurGuestbookPage setValueInCommentsField(String comments){
       commentsField.val(comments);
+      return this;
    }
 
-   public void clickAddEntryButton(){
+   public SignOurGuestbookPage clickAddEntryButton(){
       addEntryButton.click();
+      return this;
    }
 
-   public void addFeedback(String fullName, String email, String message){
+   public SignOurGuestbookPage addFeedback(String fullName, String email, String message){
       nameField.val(fullName);
       emailField.val(email);
       commentsField.val(message);
       addEntryButton.click();
+      return this;
    }
 
-   public void checkOnFeedbackBlockContains(String fullName, String email, String message){
+   public SignOurGuestbookPage checkOnFeedbackBlockContains(String fullName, String email, String message){
       feedbackBlock.shouldHave(text(fullName));
       feedbackBlock.shouldHave(text(email));
       feedbackBlock.shouldHave(text(message));
+      return this;
    }
 
-   public void checkOnFeedbackBlockNotContains(String fullName, String email, String message){
+   public SignOurGuestbookPage checkOnFeedbackBlockNotContains(String fullName, String email, String message){
       feedbackBlock.shouldNotHave(text(fullName));
       feedbackBlock.shouldNotHave(text(email));
       feedbackBlock.shouldNotHave(text(message));
+      return this;
    }
 }
