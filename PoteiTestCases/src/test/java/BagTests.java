@@ -1,10 +1,17 @@
 import core.BaseTest;
 import core.properties.Properties;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class BagTests extends BaseTest {
+
+    @BeforeTest
+    private void beforeTest(){
+        openSiteBeforeMethod();
+    }
+
 
     @Test
     void testAddProductInBag(){

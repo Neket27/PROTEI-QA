@@ -1,27 +1,27 @@
 import core.BaseTest;
 import core.constants.AccountConstants;
 import core.constants.AuthConstants;
+import core.steps.AuthSteps;
+import dataProvider.UserDataProvider;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AccountTest extends BaseTest {
 
+    private AuthSteps authSteps;
+    @BeforeTest
+    private void beforeTest() {
+        authSteps = new AuthSteps();
+    }
+
     @BeforeMethod
     private void beforeMethod() {
+        openSiteBeforeMethod();
         mainPage.clickLoginAndRegisterButton();
-        authPage.registration(AuthConstants.DEF_USER_FULL_NAME, AuthConstants.DEF_USER_EMAIL, AuthConstants.DEF_USER_PASSWORD);
+        authSteps.registrationUser(AuthConstants.DEF_USER_FULL_NAME, AuthConstants.DEF_USER_EMAIL, AuthConstants.DEF_USER_PASSWORD);
         mainPage.clickMyAccountButton();
-    }
-
-    @DataProvider
-    public Object[][] invalidFullNameList() {
-        return AccountConstants.INVALID_FUll_NAME_LIST;
-    }
-
-    @DataProvider
-    public Object[][] invalidEmailList() {
-        return AccountConstants.INVALID_EMAIL_LIST;
     }
 
 
@@ -32,7 +32,7 @@ public class AccountTest extends BaseTest {
         //Act
         changeDataUser();
         //Assert
-        myAccountPage.checkTitleContainsFullName(AccountConstants.DEF_USER_NEW_FULL_NAME);
+        myAccountPage.checkTitleContainsFullName(AccountConstants.USER_NEW_FULL_NAME);
     }
 
     @Test(description = "Change email user with valid value")
@@ -42,10 +42,10 @@ public class AccountTest extends BaseTest {
         //Act
         changeDataUser();
         //Assert
-        myAccountPage.checkTitleContainsEmail(AccountConstants.DEF_USER_NEW_EMAIL);
+        myAccountPage.checkTitleContainsEmail(AccountConstants.USER_NEW_EMAIL);
     }
 
-    @Test(description = "Change data user with invalid full name",dataProvider = "invalidFullNameList")
+    @Test(description = "Change data user with invalid full name",dataProvider = "invalidFullNameProvider", dataProviderClass = UserDataProvider.class)
     public void checkChangeFullNameOnInvalidValue(String fullName){
         //Arrange
         myAccountPage.setValueInFullNameField(fullName);
@@ -58,7 +58,7 @@ public class AccountTest extends BaseTest {
         myAccountPage.checkTitleNotContainsEmail(AccountConstants.DEF_USER_FULL_NAME);
     }
 
-    @Test(description = "Change data user with valid data", dataProvider = "invalidEmailList")
+    @Test(description = "Change data user with valid data", dataProvider = "invalidEmailProvider", dataProviderClass = UserDataProvider.class)
     public void checkChangeEmailOnInvalidValue(String email){
         //Arrange
         myAccountPage.setValueInFullNameField(AccountConstants.DEF_USER_FULL_NAME);
@@ -72,7 +72,7 @@ public class AccountTest extends BaseTest {
     }
 
     private void setValidDataUser(){
-        myAccountPage.setValueInFullNameField(AccountConstants.DEF_USER_NEW_FULL_NAME);
+        myAccountPage.setValueInFullNameField(AccountConstants.USER_NEW_FULL_NAME);
         myAccountPage.setValueInEmailField(AccountConstants.DEF_USER_EMAIL);
         myAccountPage.setValueInNewPasswordField(AuthConstants.DEF_USER_PASSWORD);
         myAccountPage.setValueInVerifyNewPasswordField(AccountConstants.DEF_USER_PASSWORD);

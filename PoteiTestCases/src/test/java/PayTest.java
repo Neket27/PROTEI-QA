@@ -1,6 +1,9 @@
 import core.BaseTest;
 import core.constants.PayConstants;
+import dataProvider.CardDataProvider;
+import dataProvider.UserDataProvider;
 import org.openqa.selenium.Alert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -9,19 +12,9 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class PayTest extends BaseTest {
 
-    @DataProvider
-    public Object[][] invalidEmailList() {
-        return PayConstants.INVALID_EMAIL_LIST;
-    }
-
-    @DataProvider
-    public Object[][] invalidNumberCardList() {
-        return PayConstants.INVALID_NUMBER_CARD_LIST;
-    }
-
-    @DataProvider
-    public Object[][] invalidDateCardList() {
-        return PayConstants.INVALID_DATE_CARD_LIST;
+    @BeforeTest
+    private void beforeTest(){
+        openSiteBeforeMethod();
     }
 
     @Test(description = "successful purchase")
@@ -36,7 +29,7 @@ public class PayTest extends BaseTest {
             payPage.setValueInEmailField(PayConstants.DEF_USER_EMAIL);
 
         payPage.setValueInNumberCardField(PayConstants.DEF_NUMBER_CARD);
-        payPage.setValueInDateCardField(PayConstants.DEF_DATE);
+        payPage.setValueInDateCardField(PayConstants.DEF_DATE_PAYMENT);
 
         //Act
         payPage.clickPlaceOrderButton();
@@ -46,7 +39,7 @@ public class PayTest extends BaseTest {
         assertEquals(PayConstants.ALERT_MESSAGE,alert.getText());
     }
 
-    @Test(description = "purchase by invalid email for unregistered user", dataProvider = "invalidEmailList")
+    @Test(description = "purchase by invalid email for unregistered user", dataProvider = "invalidEmailProvider",dataProviderClass = UserDataProvider.class)
     public void testPayInvalidEmail(String email) {
         //Arrange
         mainPage.clickWhatsNewButton();
@@ -58,7 +51,7 @@ public class PayTest extends BaseTest {
             payPage.setValueInEmailField(email);
 
         payPage.setValueInNumberCardField(PayConstants.DEF_NUMBER_CARD);
-        payPage.setValueInDateCardField(PayConstants.DEF_DATE);
+        payPage.setValueInDateCardField(PayConstants.DEF_DATE_PAYMENT);
 
         //Act
         payPage.clickPlaceOrderButton();
@@ -67,7 +60,7 @@ public class PayTest extends BaseTest {
         assertNotEquals("Thank you for using MasterCard!",alert.getText());
     }
 
-    @Test(dataProvider = "invalidNumberCardList")
+    @Test(dataProvider = "invalidNumberCardProvider",dataProviderClass = CardDataProvider.class)
     public void testPayInvalidCardNumber(Long numberCard) {
         //Arrange
         mainPage.clickWhatsNewButton();
@@ -79,7 +72,7 @@ public class PayTest extends BaseTest {
             payPage.setValueInEmailField(PayConstants.DEF_USER_EMAIL);
 
         payPage.setValueInNumberCardField(numberCard);
-        payPage.setValueInDateCardField(PayConstants.DEF_DATE);
+        payPage.setValueInDateCardField(PayConstants.DEF_DATE_PAYMENT);
 
         //Act
         payPage.clickPlaceOrderButton();
@@ -88,7 +81,7 @@ public class PayTest extends BaseTest {
         assertEquals(PayConstants.ALERT_MESSAGE,alert.getText());
     }
 
-    @Test(dataProvider = "invalidDateCardList")
+    @Test(dataProvider = "invalidDateCardProvider",dataProviderClass = CardDataProvider.class)
     public void testPayInvalidCardDate(String date) {
         //Arrange
         mainPage.clickWhatsNewButton();

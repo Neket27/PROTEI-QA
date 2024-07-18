@@ -4,6 +4,7 @@ import authTest.verificationAuthorization.VerificationAuthorization;
 import authTest.verificationAuthorization.impl.VerificationAuthorizationImpl;
 import core.BaseTest;
 import core.constants.AuthConstants;
+import dataProvider.UserDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -15,22 +16,13 @@ public class RegistrationTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
+        openSiteBeforeMethod();
         verificationAuthorization = new VerificationAuthorizationImpl();
     }
 
     @BeforeMethod
     private void beforeClass() {
         mainPage.getLoginAndRegisterButton().click();
-    }
-
-    @DataProvider
-    public Object[][] invalidEmailList() {
-        return AuthConstants.INVALID_EMAIL_LIST;
-    }
-
-    @DataProvider
-    public Object[][] invalidPasswordList() {
-        return AuthConstants.INVALID_PASSWORD_LIST;
     }
 
     @Test(description = "Successful registration")
@@ -45,7 +37,7 @@ public class RegistrationTest extends BaseTest {
         verificationAuthorization.checkAuthorization(true);
     }
 
-    @Test(description = "Unsuccessful registration", dataProvider = "invalidEmailList")
+    @Test(description = "Unsuccessful registration", dataProvider = "invalidEmailProvider", dataProviderClass = UserDataProvider.class)
     public void registrationInvalidEmail(String email) {
         //Arrange
         authPage.setValueInFullNameField(AuthConstants.DEF_USER_FULL_NAME);
@@ -57,7 +49,7 @@ public class RegistrationTest extends BaseTest {
         verificationAuthorization.checkAuthorization(false);
     }
 
-    @Test(description = "Unsuccessful password",dataProvider = "invalidPasswordList")
+    @Test(description = "Unsuccessful password",dataProvider = "invalidPasswordProvider", dataProviderClass = UserDataProvider.class)
     public void registrationInvalidPassword(String password) {
         //Arrange
         authPage.setValueInFullNameField(AuthConstants.DEF_USER_FULL_NAME);

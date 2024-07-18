@@ -18,14 +18,6 @@ public class AuthPage {
     private final SelenideElement passwordLoginField= $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=login\"]//input[@name=\"passwd\"]"));
     private final SelenideElement loginButton =  $(byXpath("//form[@action=\"/cgi-bin/badstore.cgi?action=login\"]//input[@type=\"submit\"]"));
 
-    public AuthPage registration(String fullName, String email, String password) {
-       fullNameField.val(AuthConstants.DEF_USER_FULL_NAME);
-       emailLoginField.val(AuthConstants.DEF_USER_EMAIL);
-       passwordLoginField.val(AuthConstants.DEF_USER_PASSWORD);
-       registrationButton.click();
-       return this;
-    }
-
     public AuthPage setValueInFullNameField(String fullName) {
         fullNameField.val(fullName);
         return this;

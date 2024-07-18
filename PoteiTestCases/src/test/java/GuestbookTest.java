@@ -1,24 +1,21 @@
 import core.BaseTest;
 import core.constants.GuestbookConstants;
+import dataProvider.UserDataProvider;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class GuestbookTest extends BaseTest {
 
+    @BeforeTest
+    private void beforeTest(){
+        openSiteBeforeMethod();
+    }
+
     @BeforeMethod
     public void beforeMethod() {
         mainPage.clickSignOurGuestbookButton();
-    }
-
-    @DataProvider
-    private Object[][] invalidEmailList() {
-        return GuestbookConstants.INVALID_EMAIL_LIST;
-    }
-
-    @DataProvider
-    private Object[][] invalidFullNameList() {
-        return GuestbookConstants.INVALID_FUll_NAME_LIST;
     }
 
     @Test(description = "success add feedback")
@@ -33,7 +30,7 @@ public class GuestbookTest extends BaseTest {
         signOurGuestbookPage.checkOnFeedbackBlockContains(GuestbookConstants.DEF_USER_FULL_NAME,GuestbookConstants.DEF_USER_EMAIL,GuestbookConstants.DEF_USER_MESSAGE);
     }
 
-    @Test(description = "add feedback with invalid full name", dataProvider = "invalidFullNameList")
+    @Test(description = "add feedback with invalid full name", dataProvider = "invalidFullNameProvider", dataProviderClass = UserDataProvider.class)
     public void addFeedbackInvalidFullName(String fullName){
         //Arrange
         signOurGuestbookPage.setValueInNameField(fullName);
@@ -45,7 +42,7 @@ public class GuestbookTest extends BaseTest {
         signOurGuestbookPage.checkOnFeedbackBlockNotContains(GuestbookConstants.DEF_USER_FULL_NAME,GuestbookConstants.DEF_USER_EMAIL,GuestbookConstants.DEF_USER_MESSAGE);
     }
 
-    @Test(description = "add feedback with invalid email", dataProvider = "invalidEmailList")
+    @Test(description = "add feedback with invalid email", dataProvider = "invalidEmailProvider", dataProviderClass = UserDataProvider.class)
     public void addFeedbackInvalidEmail(String email){
         //Arrange
         signOurGuestbookPage.setValueInNameField(GuestbookConstants.DEF_USER_FULL_NAME);
